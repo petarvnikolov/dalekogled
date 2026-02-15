@@ -64,7 +64,7 @@ export function MainPainting() {
             onClick={handleZoom}
             className="absolute top-4 right-4 p-2.5 bg-black/60 backdrop-blur-sm rounded-full hover:bg-black/80 transition-colors"
           >
-            <Maximize2 className="w-4 h-4" />
+            <Maximize2 className="w-4 h-4 text-white" />
           </button>
         </div>
       </div>
@@ -127,7 +127,7 @@ export function MainPainting() {
               }}
               className="absolute top-6 right-6 p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-colors z-10"
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5 text-white" />
             </button>
             <motion.img
               src={painting.imageUrl}
