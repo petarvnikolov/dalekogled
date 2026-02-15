@@ -3,4 +3,3 @@ dist
 .git
 .vscode
 Dockerfile
-nginx.conf
