@@ -27,17 +27,17 @@ export function ArtistScreen() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="px-6 py-5 border-b border-white/10 sticky top-0 bg-black/95 backdrop-blur-sm z-10">
+      <header className="px-6 py-5 border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-10">
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate("/")}
-            className="p-2 -ml-2 hover:bg-white/5 rounded-lg transition-colors"
+            className="p-2 -ml-2 hover:bg-accent rounded-lg transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <h1 className="font-['Playfair_Display'] text-lg tracking-wide">The Artist</h1>
+          <h1 className="font-['Inter'] font-bold text-lg tracking-tight">The Artist</h1>
         </div>
       </header>
 
@@ -50,7 +50,7 @@ export function ArtistScreen() {
           className="space-y-6"
         >
           <div className="flex gap-6">
-            <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 bg-white/5 border border-white/10">
+            <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 bg-accent border border-border">
               <img
                 src="https://images.unsplash.com/photo-1732305829051-6e82db47d1da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludGVyJTIwYXJ0aXN0JTIwcG9ydHJhaXQlMjBoaXN0b3JpY2FsfGVufDF8fHx8MTc3MDc5NDQwNHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                 alt="Hieronymus Bosch"
@@ -59,8 +59,8 @@ export function ArtistScreen() {
             </div>
             <div className="flex-1 space-y-2">
               <h2 className="font-['Playfair_Display'] text-2xl">Hieronymus Bosch</h2>
-              <p className="text-sm text-white/60">c. 1450 – 1516</p>
-              <div className="flex items-center gap-2 text-sm text-white/70">
+              <p className="text-sm text-muted-foreground">c. 1450 – 1516</p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
                 <span>'s-Hertogenbosch, Netherlands</span>
               </div>
@@ -69,8 +69,8 @@ export function ArtistScreen() {
 
           {/* Biography */}
           <div className="space-y-4">
-            <h3 className="font-['Playfair_Display'] text-lg text-white/90">Biography</h3>
-            <div className="space-y-3 text-sm text-white/70 leading-relaxed">
+            <h3 className="font-['Inter'] font-bold text-lg">Biography</h3>
+            <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
               <p>
                 Hieronymus Bosch was a Dutch painter from the Early Netherlandish period. Known for his fantastic imagery, detailed landscapes, and illustrations of religious concepts and narratives, his work is characterized by intricate symbolism and extraordinary imagination.
               </p>
@@ -85,14 +85,14 @@ export function ArtistScreen() {
 
           {/* Interactive Map Placeholder */}
           <div className="space-y-3">
-            <h3 className="font-['Playfair_Display'] text-lg text-white/90">Artist's Journey</h3>
-            <div className="relative h-48 bg-white/5 rounded-lg border border-white/10 overflow-hidden">
+            <h3 className="font-['Inter'] font-bold text-lg">Artist's Journey</h3>
+            <div className="relative h-48 bg-accent rounded-lg border border-border overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-2">
-                  <MapPin className="w-8 h-8 mx-auto text-white/40" />
-                  <p className="text-sm text-white/50">Interactive map of artist's life</p>
-                  <p className="text-xs text-white/30">Born and lived in 's-Hertogenbosch</p>
+                  <MapPin className="w-8 h-8 mx-auto text-muted-foreground" />
+                  <p className="text-sm text-muted-foreground">Interactive map of artist's life</p>
+                  <p className="text-xs text-muted-foreground/70">Born and lived in 's-Hertogenbosch</p>
                 </div>
               </div>
               {/* Map marker */}
@@ -115,7 +115,7 @@ export function ArtistScreen() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="space-y-4 pb-8"
         >
-          <h3 className="font-['Playfair_Display'] text-lg text-white/90">Other Notable Works</h3>
+          <h3 className="font-['Inter'] font-bold text-lg">Other Notable Works</h3>
           <div className="grid grid-cols-2 gap-4">
             {otherArtworks.map((artwork, index) => (
               <motion.div
@@ -125,7 +125,7 @@ export function ArtistScreen() {
                 transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
                 className="group cursor-pointer"
               >
-                <div className="aspect-[3/4] overflow-hidden rounded-lg bg-white/5 border border-white/10 group-hover:border-white/30 transition-all">
+                <div className="aspect-[3/4] overflow-hidden rounded-lg bg-accent border border-border group-hover:border-muted-foreground/30 transition-all">
                   <img
                     src={artwork.imageUrl}
                     alt={artwork.title}
@@ -134,7 +134,7 @@ export function ArtistScreen() {
                 </div>
                 <div className="mt-2 space-y-1">
                   <p className="text-sm font-['Playfair_Display']">{artwork.title}</p>
-                  <p className="text-xs text-white/50">{artwork.year}</p>
+                  <p className="text-xs text-muted-foreground">{artwork.year}</p>
                 </div>
               </motion.div>
             ))}

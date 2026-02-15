@@ -1,14 +1,25 @@
+
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { User, Palette, MapPin, Maximize2, X, ChevronLeft } from "lucide-react";
+import { paintings } from "../data/artData";
 
 export function MainPainting() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [isZoomed, setIsZoomed] = useState(false);
   const [scale, setScale] = useState(1);
 
-  const paintingUrl = "https://images.unsplash.com/photo-1742145415317-170c91dc7006?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc2ljYWwlMjBwYWludGluZyUyMHJlbmFpc3NhbmNlJTIwYXJ0JTIwbXVzZXVtfGVufDF8fHx8MTc3MDc5NDQwM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
+  const painting = paintings.find(p => p.id === Number(id));
+
+  if (!painting) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-muted-foreground">Painting not found</p>
+      </div>
+    );
+  }
 
   const handleZoom = () => {
     setIsZoomed(true);
@@ -23,14 +34,17 @@ export function MainPainting() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-black">
+    <div className="min-h-screen flex flex-col bg-background">
       {/* Header */}
-      <header className="px-6 py-5 border-b border-white/10">
+      <header className="px-6 py-5 border-b border-border">
         <div className="flex items-center justify-between">
-          <button className="p-2 -ml-2 hover:bg-white/5 rounded-lg transition-colors">
+          <button
+            onClick={() => navigate("/")}
+            className="p-2 -ml-2 hover:bg-accent rounded-lg transition-colors"
+          >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <h1 className="font-['Playfair_Display'] text-lg tracking-wide">DALEKOGLED</h1>
+          <h1 className="font-['Inter'] font-black text-lg tracking-tight">DALEKOGLED</h1>
           <div className="w-9" />
         </div>
       </header>
@@ -39,8 +53,8 @@ export function MainPainting() {
       <div className="flex-1 flex items-center justify-center p-6 relative">
         <div className="relative w-full aspect-[3/4] max-h-[60vh]">
           <motion.img
-            src={paintingUrl}
-            alt="The Garden of Earthly Delights"
+            src={painting.imageUrl}
+            alt={painting.title}
             className="w-full h-full object-cover rounded-sm shadow-2xl"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -59,11 +73,11 @@ export function MainPainting() {
       <div className="px-6 pb-6 space-y-6">
         <div>
           <h2 className="font-['Playfair_Display'] text-2xl mb-2">
-            The Garden of Earthly Delights
+            {painting.title}
           </h2>
-          <p className="text-sm text-white/60 mb-4">Hieronymus Bosch • c. 1490–1510</p>
-          <p className="text-sm text-white/80 leading-relaxed">
-            A triptych depicting the Garden of Eden, the earthly world filled with nude figures and fantastical elements, and Hell. This masterwork explores humanity's relationship with pleasure, sin, and divine judgment through intricate symbolism.
+          <p className="text-sm text-muted-foreground mb-4">{painting.artist} • {painting.year}</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {painting.description}
           </p>
         </div>
 
@@ -115,15 +129,13 @@ export function MainPainting() {
             >
               <X className="w-5 h-5" />
             </button>
-            
             <motion.img
-              src={paintingUrl}
-              alt="The Garden of Earthly Delights - Zoomed"
+              src={painting.imageUrl}
+              alt={painting.title + " - Zoomed"}
               className="max-w-full max-h-full object-contain"
               style={{ scale }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
-            
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs">
               Scroll to zoom • {Math.round(scale * 100)}%
             </div>
@@ -140,10 +152,10 @@ function NavButton({ icon, label, onClick }: { icon: React.ReactNode; label: str
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all"
+      className="flex items-center gap-3 p-4 bg-accent border border-border rounded-lg hover:bg-accent/60 hover:border-muted-foreground/30 transition-all"
     >
-      <div className="text-white/80">{icon}</div>
-      <span className="text-sm font-['Playfair_Display']">{label}</span>
+      <div className="text-muted-foreground">{icon}</div>
+      <span className="text-sm font-['Inter'] font-semibold">{label}</span>
     </motion.button>
   );
 }

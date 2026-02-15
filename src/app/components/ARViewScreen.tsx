@@ -9,29 +9,28 @@ export function ARViewScreen() {
 
   const handleStartAR = () => {
     setIsScanning(true);
-    // Simulate AR initialization
     setTimeout(() => {
       setIsScanning(false);
     }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-black relative">
+    <div className="min-h-screen bg-background relative">
       {/* Header */}
-      <header className="px-6 py-5 border-b border-white/10 absolute top-0 left-0 right-0 bg-black/60 backdrop-blur-md z-10">
+      <header className="px-6 py-5 border-b border-border absolute top-0 left-0 right-0 bg-background/80 backdrop-blur-md z-10">
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate("/")}
-            className="p-2 -ml-2 hover:bg-white/5 rounded-lg transition-colors"
+            className="p-2 -ml-2 hover:bg-accent rounded-lg transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <h1 className="font-['Playfair_Display'] text-lg tracking-wide">AR View</h1>
+          <h1 className="font-['Inter'] font-bold text-lg tracking-tight">AR View</h1>
         </div>
       </header>
 
       {/* AR Camera View Simulation */}
-      <div className="min-h-screen flex flex-col items-center justify-center relative bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center relative bg-gradient-to-br from-muted via-background to-muted">
         {/* Scanning overlay */}
         {isScanning && (
           <motion.div
@@ -43,9 +42,9 @@ export function ARViewScreen() {
               initial={{ y: 0 }}
               animate={{ y: "100vh" }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+              className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"
             />
-            <div className="absolute inset-0 bg-blue-500/5" />
+            <div className="absolute inset-0 bg-primary/5" />
           </motion.div>
         )}
 
@@ -78,14 +77,14 @@ export function ARViewScreen() {
               }}
               className="w-24 h-24 mx-auto relative"
             >
-              <div className="absolute inset-0 border-2 border-white/20 rounded-xl" />
-              <div className="absolute inset-2 border-2 border-white/40 rounded-lg" />
+              <div className="absolute inset-0 border-2 border-border rounded-xl" />
+              <div className="absolute inset-2 border-2 border-primary/40 rounded-lg" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <Camera className="w-10 h-10 text-white/80" />
+                <Camera className="w-10 h-10" />
               </div>
             </motion.div>
-            <h2 className="font-['Playfair_Display'] text-2xl">View in Your Space</h2>
-            <p className="text-sm text-white/60 max-w-xs mx-auto leading-relaxed">
+            <h2 className="font-['Inter'] font-bold text-2xl tracking-tight">View in Your Space</h2>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed">
               Point your camera at a wall to place and experience the painting in augmented reality
             </p>
           </div>
@@ -93,7 +92,7 @@ export function ARViewScreen() {
           <button
             onClick={handleStartAR}
             disabled={isScanning}
-            className="px-8 py-4 bg-white text-black font-['Playfair_Display'] rounded-full hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-8 py-4 bg-primary text-primary-foreground font-['Inter'] font-bold rounded-full hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isScanning ? "Scanning Surface..." : "Start AR Experience"}
           </button>
@@ -106,8 +105,8 @@ export function ARViewScreen() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="absolute bottom-8 left-6 right-6 z-10"
         >
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 space-y-3">
-            <h3 className="font-['Playfair_Display'] text-sm text-center mb-3">AR Controls</h3>
+          <div className="bg-card/80 backdrop-blur-md border border-border rounded-xl p-5 space-y-3">
+            <h3 className="font-['Inter'] font-bold text-sm text-center mb-3">AR Controls</h3>
             <div className="grid grid-cols-2 gap-3">
               <ControlItem icon={<Move className="w-4 h-4" />} label="Move" />
               <ControlItem icon={<RotateCw className="w-4 h-4" />} label="Rotate" />
@@ -137,7 +136,7 @@ function CornerMarker({ position }: { position: "top-left" | "top-right" | "bott
       className={`absolute ${positions[position]}`}
     >
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0H10V2H2V10H0V0Z" fill="white" fillOpacity="0.5" />
+        <path d="M0 0H10V2H2V10H0V0Z" fill="currentColor" fillOpacity="0.5" />
       </svg>
     </motion.div>
   );
@@ -145,8 +144,8 @@ function CornerMarker({ position }: { position: "top-left" | "top-right" | "bott
 
 function ControlItem({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="flex items-center gap-2 text-white/70">
-      <div className="text-white/50">{icon}</div>
+    <div className="flex items-center gap-2 text-muted-foreground">
+      <div className="text-muted-foreground">{icon}</div>
       <span className="text-xs">{label}</span>
     </div>
   );
