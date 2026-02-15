@@ -115,7 +115,7 @@ export const collections: Collection[] = [
   {
     id: "northern-renaissance",
     name: "Northern Renaissance",
-    count: 3,
+    count: 1,
     period: "1400–1600",
     description: "Detailed realism and complex symbolism from the Low Countries and Germany",
     paintings: [1],
